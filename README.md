@@ -70,3 +70,5 @@ Steam/steamapps/common/SteamVR/drivers/`<your_driver_name>`/
   ├── game_controller.svg  
   └── default.vrsettings
 ```
+# Based on
+finallyfunctional/openvr-driver-example
