@@ -42,8 +42,8 @@ Like:
 # Esp32 arduino client example
 For arduino, based on wificlient lib:
 ```cpp
-if(!client.connect(IPAddress("192.168.1.4"), 10000)){ 
-	client.connect("192.168.1.4", 10000)) 
+if(!client.connect(IPAddress("192.168.1.4"), 9876)){ 
+	client.connect("192.168.1.4", 9876)) 
     delay(1000);
     return;
 }
