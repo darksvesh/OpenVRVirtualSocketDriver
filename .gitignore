@@ -32,6 +32,7 @@
 *.app
 
 # Directories
+.vs/
 x64/
 x86/
 arm/
