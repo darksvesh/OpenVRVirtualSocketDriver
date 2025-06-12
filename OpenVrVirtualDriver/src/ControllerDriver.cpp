@@ -24,8 +24,6 @@ EVRInitError ControllerDriver::Activate(uint32_t unObjectId)
 	VRDriverInput()->CreateScalarComponent(props, "/input/trackpad/x", &trackpadXHandle, EVRScalarType::VRScalarType_Absolute,
 		EVRScalarUnits::VRScalarUnits_NormalizedTwoSided); 
 	
-
-
 	VRDriverInput()->CreateScalarComponent(props, "/input/trigger/value", &triggerValueHandle,
 		EVRScalarType::VRScalarType_Absolute, EVRScalarUnits::VRScalarUnits_NormalizedOneSided); // Normalized 0..1 for trigger pull
 	VRDriverInput()->CreateBooleanComponent(props, "/input/a/click", &aClickHandle);
