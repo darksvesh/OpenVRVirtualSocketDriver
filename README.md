@@ -36,7 +36,7 @@ Like:
 /input/trigger/value=0.75;
 /input/a/click=true;
 
-# Esp32 arduino example
+# Esp32 arduino client example
 For arduino, based on wificlient lib:
 ```cpp
 if(!client.connect(IPAddress("192.168.1.4"), 10000)){ 
@@ -46,7 +46,7 @@ if(!client.connect(IPAddress("192.168.1.4"), 10000)){
 }
 client.print("/input/trigger/value=0.75;");
 ```
-# .net C# example
+# .net client C# example
 ```c#
 TcpClient client = new TcpClient();
 client.Connect(serverIp, serverPort);
