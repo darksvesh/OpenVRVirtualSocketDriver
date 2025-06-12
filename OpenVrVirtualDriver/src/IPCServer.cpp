@@ -1,26 +1,12 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define _WINSOCKAPI_
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
-
 #include "IPCServer.h">
-
-
-
-
-
 #include <ControllerDriver.h>
-
 
 std::mutex logMutex;
 std::mutex clientMutex;
-
 IPCServer::IPCServer(ControllerDriver* device) : m_Device(device), m_Running(false) {}
-
-
-
-
-
-
 
 void IPCServer::Start() {
     m_Running = true;
@@ -112,41 +98,32 @@ void IPCServer::HandleClient(SOCKET clientSocket) {
 void IPCServer::ServerLoop() {
     WSADATA wsaData;
     WSAStartup(MAKEWORD(2, 2), &wsaData);
-
     SOCKET serverSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     sockaddr_in serverAddr{};
     serverAddr.sin_family = AF_INET;
     serverAddr.sin_addr.s_addr = inet_addr("0.0.0.0");
     serverAddr.sin_port = htons(9876);
-
     bind(serverSocket, (SOCKADDR*)&serverAddr, sizeof(serverAddr));
     listen(serverSocket, SOMAXCONN);
     u_long mode = 1; 
     ioctlsocket(serverSocket, FIONBIO, &mode);
     fd_set readfds;
     timeval timeout;
-
     while (m_Running) {
         FD_ZERO(&readfds);
         FD_SET(serverSocket, &readfds);
-
         timeout.tv_sec = 0;
         timeout.tv_usec = 50000; // 50ms
-
         int activity = select(0, &readfds, NULL, NULL, &timeout);
         if (activity > 0 && FD_ISSET(serverSocket, &readfds)) {
             SOCKET clientSocket = accept(serverSocket, NULL, NULL);
-
             if (clientSocket == INVALID_SOCKET) continue;
-
-
             std::lock_guard<std::mutex> lock(clientMutex);
             m_ClientThreads.push_back(std::thread([this, clientSocket]() {
                 HandleClient(clientSocket);
                 }));
         }
     }
-
     closesocket(serverSocket);
     WSACleanup();
 }
