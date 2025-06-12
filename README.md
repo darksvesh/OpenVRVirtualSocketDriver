@@ -58,13 +58,12 @@ string command = "/input/trigger/value=0.75;";
 stream.Write(command, 0, command.Length);
 ```
 # Driver installation
-Copy driver lib into SteamVR\drivers 
-driver folder hierarchy:
+Copy driver files into SteamVR\drivers folder:
 ```
 Steam/steamapps/common/SteamVR/drivers/`<your_driver_name>`/
 ├── bin/
 │ ├── linux64/
-│ │ └── driver_`<your_driver_name>`.so
+│ │ └── driver_`<your_driver_name>`.so (linux)
 │ └── win64/
 │   └── driver_`<your_driver_name>`.dll
 └── resources/
