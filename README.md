@@ -1,5 +1,5 @@
 # OpenVRVirtualSocketDriver
-I created this server for my custom devices to work with SteamVR.  
+I created this driver for my custom devices to work with SteamVR.  
 It is simple enough to connect to it using an **ESP32** to control and send input data.
 
 # It supports:
