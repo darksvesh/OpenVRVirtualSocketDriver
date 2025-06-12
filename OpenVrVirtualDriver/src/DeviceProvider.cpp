@@ -8,7 +8,7 @@ EVRInitError DeviceProvider::Init(IVRDriverContext* pDriverContext)
         return initError;
     }
     
-    VRDriverLog()->Log("Initializing controller"); //this is how you log out Steam's log file.
+    VRDriverLog()->Log("Initializing controller"); 
 
     controllerDriver = new ControllerDriver();
     VRServerDriverHost()->TrackedDeviceAdded("Creepybox virtual threadmill", TrackedDeviceClass_Controller, controllerDriver); //add all your devices like this.

@@ -80,7 +80,7 @@
     }
   },
   "category": "legacy",
-  "controller_type": "Creepybox Virtual controller",
+  "controller_type": "Example Virtual controller",
   "description": "Virtual driver for network and app vr values passthrough",
   "name": "Virtual Driver for devices",
   "options": {

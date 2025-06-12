@@ -1,8 +1,3 @@
-
-// ============================
-// IPCServer.cpp
-// ============================
-
 #define _CRT_SECURE_NO_WARNINGS
 #define _WINSOCKAPI_
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
@@ -10,13 +5,7 @@
 #include "IPCServer.h">
 
 
-#ifndef WSOK
-//#define WSOK
-//#include <windows.h>
-//#include <winsock2.h>
-//#include <ws2tcpip.h>
-//#pragma comment(lib, "Ws2_32.lib")
-#endif // !WSOK
+
 
 
 #include <ControllerDriver.h>
@@ -28,25 +17,8 @@ std::mutex clientMutex;
 IPCServer::IPCServer(ControllerDriver* device) : m_Device(device), m_Running(false) {}
 
 
-std::string IPCServer::current_time() {
-  //  std::time_t t = std::time(nullptr);
-  //  char buf[100];
- //   std::strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", std::localtime(&t));
-  //  return std::string(buf);
-    return "";
-}
 
-// Функция для логирования
-void IPCServer::log_to_file(const std::string& message, const std::string& logfile) {
-    //std::lock_guard<std::mutex> lock(logMutex);
-   // std::ofstream log_file(logfile, std::ios::app); // Открытие файла для добавления информации
-   // if (log_file.is_open()) {
-   //     log_file << IPCServer::current_time() << " - " << message << std::endl;
-  //  }
-  //  else {
-   //     std::cerr << "Ошибка при открытии файла для логирования!" << std::endl;
-  //  }
-}
+
 
 
 
@@ -57,7 +29,6 @@ void IPCServer::Start() {
 
 void IPCServer::Stop() {
     m_Running = false;
-    // Ожидаем завершения всех потоков
     std::lock_guard<std::mutex> lock(clientMutex);
     {
         for (auto& clientThread : m_ClientThreads) {
@@ -65,7 +36,7 @@ void IPCServer::Stop() {
                 clientThread.join();
             }
         }
-        m_ClientThreads.clear(); // Удалим все завершённые потоки
+        m_ClientThreads.clear(); 
     }
     if (m_Thread.joinable()) m_Thread.join();
 }
@@ -91,14 +62,12 @@ void IPCServer::ProcessInput(const std::string& input)
 
     size_t equalPos = input.find('=');
     if (equalPos == std::string::npos) {
-     //   std::cerr << "Invalid input format: " << input << std::endl;
         return;
     }
 
     std::string path = input.substr(0, equalPos);
     std::string valueStr = input.substr(equalPos + 1);
 
-    // Determine if the value is boolean or float
     if (valueStr == "true" || valueStr == "false") {
         bool state = (valueStr == "true");
         m_Device->SetButtonState(path, state);
@@ -109,12 +78,10 @@ void IPCServer::ProcessInput(const std::string& input)
             m_Device->SetAxisState(path, value);
         }
         catch (const std::invalid_argument&) {
-         //   std::cerr << "Invalid numeric value: " << valueStr << std::endl;
         }
     }
 }
 
-// Функция обработки каждого клиента
 void IPCServer::HandleClient(SOCKET clientSocket) {
     char buffer[512];
     std::string dataBuffer;
@@ -154,7 +121,7 @@ void IPCServer::ServerLoop() {
 
     bind(serverSocket, (SOCKADDR*)&serverAddr, sizeof(serverAddr));
     listen(serverSocket, SOMAXCONN);
-    u_long mode = 1; // 1 = non-blocking
+    u_long mode = 1; 
     ioctlsocket(serverSocket, FIONBIO, &mode);
     fd_set readfds;
     timeval timeout;

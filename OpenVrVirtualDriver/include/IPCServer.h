@@ -1,6 +1,3 @@
-// ============================
-// IPCServer.h
-// ============================
 
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
@@ -38,9 +35,7 @@ public:
 private:
     void ProcessInput(const std::string& input);
     void ServerLoop();
-    void log_to_file(const std::string& message, const std::string& logfile);
     void HandleClient(SOCKET clientSocket);
-    std::string current_time();
     std::thread m_Thread;
     std::atomic<bool> m_Running;
     ControllerDriver* m_Device;

@@ -9,21 +9,20 @@
 
 EVRInitError ControllerDriver::Activate(uint32_t unObjectId)
 {
-	driverId = unObjectId; //unique ID for your driver
+	driverId = unObjectId;
+	PropertyContainerHandle_t props = VRProperties()->TrackedDeviceToPropertyContainer(driverId); 
 
-	PropertyContainerHandle_t props = VRProperties()->TrackedDeviceToPropertyContainer(driverId); //this gets a container object where you store all the information about your driver
-
-	VRProperties()->SetStringProperty(props, Prop_InputProfilePath_String, "controller_profile.json"); //tell OpenVR where to get your driver's Input Profile
-	VRProperties()->SetInt32Property(props, Prop_ControllerRoleHint_Int32, ETrackedControllerRole::TrackedControllerRole_Treadmill); //tells OpenVR what kind of device this is
+	VRProperties()->SetStringProperty(props, Prop_InputProfilePath_String, "controller_profile.json");
+	VRProperties()->SetInt32Property(props, Prop_ControllerRoleHint_Int32, ETrackedControllerRole::TrackedControllerRole_Treadmill); 
 	VRProperties()->SetBoolProperty(props, Prop_HasControllerComponent_Bool, true);
 	VRDriverInput()->CreateScalarComponent(props, "/input/joystick/y", &joystickYHandle, EVRScalarType::VRScalarType_Absolute,
-		EVRScalarUnits::VRScalarUnits_NormalizedTwoSided); //sets up handler you'll use to send joystick commands to OpenVR with, in the Y direction (forward/backward)
+		EVRScalarUnits::VRScalarUnits_NormalizedTwoSided); 
 	VRDriverInput()->CreateScalarComponent(props, "/input/trackpad/y", &trackpadYHandle, EVRScalarType::VRScalarType_Absolute,
-		EVRScalarUnits::VRScalarUnits_NormalizedTwoSided); //sets up handler you'll use to send trackpad commands to OpenVR with, in the Y direction
+		EVRScalarUnits::VRScalarUnits_NormalizedTwoSided); 
 	VRDriverInput()->CreateScalarComponent(props, "/input/joystick/x", &joystickXHandle, EVRScalarType::VRScalarType_Absolute,
-		EVRScalarUnits::VRScalarUnits_NormalizedTwoSided); //Why VRScalarType_Absolute? Take a look at the comments on EVRScalarType.
+		EVRScalarUnits::VRScalarUnits_NormalizedTwoSided); 
 	VRDriverInput()->CreateScalarComponent(props, "/input/trackpad/x", &trackpadXHandle, EVRScalarType::VRScalarType_Absolute,
-		EVRScalarUnits::VRScalarUnits_NormalizedTwoSided); //Why VRScalarUnits_NormalizedTwoSided? Take a look at the comments on EVRScalarUnits.
+		EVRScalarUnits::VRScalarUnits_NormalizedTwoSided); 
 	
 
 
@@ -48,24 +47,6 @@ EVRInitError ControllerDriver::Activate(uint32_t unObjectId)
 	return VRInitError_None;
 }
 
-
-std::string ControllerDriver::current_time() {
-	std::time_t t = std::time(nullptr);
-	char buf[100];
-	std::strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", std::localtime(&t));
-	return std::string(buf);
-}
-
-// Функция для логирования
-void ControllerDriver::log_to_file(const std::string& message, const std::string& logfile) {
-	//std::ofstream log_file(logfile, std::ios::app); // Открытие файла для добавления информации
-	//if (log_file.is_open()) {
-	//	log_file << ControllerDriver::current_time() << " - " << message << std::endl;
-	//}
-	//else {
-	//	std::cerr << "Ошибка при открытии файла для логирования!" << std::endl;
-	//}
-}
 
 void ControllerDriver::SetPosition(float dx, float dy, float dz)
 {
@@ -109,10 +90,8 @@ std::string ControllerDriver::bool_to_string(bool value) {
 
 void ControllerDriver::SetButtonState(std::string buttonid, bool state)
 {
-	//ControllerDriver::log_to_file(buttonid + " " + ControllerDriver::bool_to_string(state), "d:\\1\\liblog.txt");
 	auto it = buttonMap.find(buttonid);
 	if (it != buttonMap.end()) {
-		//ControllerDriver::log_to_file("Found", "d:\\1\\liblog.txt");
 		buttonStates[it->second] = state;
 	}
 }
@@ -120,10 +99,8 @@ void ControllerDriver::SetButtonState(std::string buttonid, bool state)
 void ControllerDriver::SetAxisState(std::string axisid, float state)
 {
 
-	//ControllerDriver::log_to_file(axisid +" "+ std::to_string(state), "d:\\1\\liblog.txt");
-	auto it = axisMap.find(axisid);
+auto it = axisMap.find(axisid);
 	if (it != axisMap.end()) {
-		//ControllerDriver::log_to_file("Found", "d:\\1\\liblog.txt");
 		axisStates[it->second] = state;
 	}
 }
