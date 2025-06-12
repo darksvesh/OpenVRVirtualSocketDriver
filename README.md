@@ -46,3 +46,26 @@ if(!client.connect(IPAddress("192.168.1.4"), 10000)){
 }
 client.print("/input/trigger/value=0.75;");
 ```
+# .net C# example
+```c#
+TcpClient client = new TcpClient();
+client.Connect(serverIp, serverPort);
+NetworkStream stream = client.GetStream();
+string command = "/input/trigger/value=0.75;";
+stream.Write(command, 0, command.Length);
+```
+# Driver installation
+Copy driver lib into SteamVR\drivers 
+driver folder hierarchy:
+
+Steam/steamapps/common/SteamVR/drivers/`<your_driver_name>`/
+├── bin/
+│ ├── linux64/
+│ │ └── driver_`<your_driver_name>`.so
+│ └── win64/
+│   └── driver_`<your_driver_name>`.dll
+└── resources/
+  ├── controller_profile.json
+  ├── driver.vrdrivermanifest
+  ├── game_controller.svg  
+  └── default.vrsettings
