@@ -57,7 +57,7 @@ stream.Write(command, 0, command.Length);
 # Driver installation
 Copy driver lib into SteamVR\drivers 
 driver folder hierarchy:
-
+```
 Steam/steamapps/common/SteamVR/drivers/`<your_driver_name>`/
 ├── bin/
 │ ├── linux64/
@@ -69,3 +69,4 @@ Steam/steamapps/common/SteamVR/drivers/`<your_driver_name>`/
   ├── driver.vrdrivermanifest
   ├── game_controller.svg  
   └── default.vrsettings
+```
