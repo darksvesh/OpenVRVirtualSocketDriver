@@ -116,7 +116,7 @@ void IPCServer::ServerLoop() {
     SOCKET serverSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
     sockaddr_in serverAddr{};
     serverAddr.sin_family = AF_INET;
-    serverAddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    serverAddr.sin_addr.s_addr = inet_addr("0.0.0.0");
     serverAddr.sin_port = htons(9876);
 
     bind(serverSocket, (SOCKADDR*)&serverAddr, sizeof(serverAddr));
