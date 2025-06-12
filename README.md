@@ -1,6 +1,8 @@
-# OpenVRVirtualSocketDriver
+# OpenVR Virtual Socket Driver
 I created this driver for my custom devices to work with SteamVR.  
 It is simple enough to connect to it using an **ESP32** to control and send input data.
+It creates a TCP socket with multithreading and multiple connection support, receiving data through it from external ESP32-based devices to act as Steam VR input. 
+You can make your own pedals or vr carpet or additional buttons or anything to improve your vr expirience.
 
 # Release download page
 [Release page](https://github.com/darksvesh/OpenVRVirtualSocketDriver/releases/tag/v1)
