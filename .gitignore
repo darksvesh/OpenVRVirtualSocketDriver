@@ -30,3 +30,17 @@
 *.exe
 *.out
 *.app
+
+# Directories
+x64/
+x86/
+arm/
+bin/
+debug/
+OpenVrVirtualDriver/bin/
+OpenVrVirtualDriver/arm/
+OpenVrVirtualDriver/x64/
+OpenVrVirtualDriver/x86/
+
+
+
