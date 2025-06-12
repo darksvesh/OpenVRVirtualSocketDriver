@@ -1,0 +1,91 @@
+{
+  "bindings": {
+    "/actions/legacy": {
+      "haptics": [],
+      "poses": [],
+      "sources": [
+        {
+          "inputs": {
+            "position": {
+              "output": "/actions/legacy/in/left_axis0_value"
+            }
+          },
+          "mode": "trackpad",
+          "path": "/user/treadmill/input/trackpad"
+        },
+        {
+          "inputs": {
+            "position": {
+              "output": "/actions/legacy/in/left_axis0_value"
+            }
+          },
+          "mode": "joystick",
+          "path": "/user/treadmill/input/joystick"
+        },
+        {
+          "inputs": {
+            "value": {
+              "output": "/actions/legacy/in/trigger_value"
+            }
+          },
+          "mode": "trigger",
+          "path": "/user/treadmill/input/trigger/value"
+        },
+        {
+          "inputs": {
+            "value": {
+              "output": "/actions/legacy/in/trigger_squeeze"
+            }
+          },
+          "mode": "trigger",
+          "path": "/user/treadmill/input/trigger/squeeze"
+        },
+        {
+          "inputs": {
+            "click": {
+              "output": "/actions/legacy/in/a_click"
+            }
+          },
+          "mode": "button",
+          "path": "/user/treadmill/input/a/click"
+        },
+        {
+          "inputs": {
+            "click": {
+              "output": "/actions/legacy/in/b_click"
+            }
+          },
+          "mode": "button",
+          "path": "/user/treadmill/input/b/click"
+        },
+        {
+          "inputs": {
+            "click": {
+              "output": "/actions/legacy/in/x_click"
+            }
+          },
+          "mode": "button",
+          "path": "/user/treadmill/input/x/click"
+        },
+        {
+          "inputs": {
+            "click": {
+              "output": "/actions/legacy/in/y_click"
+            }
+          },
+          "mode": "button",
+          "path": "/user/treadmill/input/y/click"
+        }
+      ]
+    }
+  },
+  "category": "legacy",
+  "controller_type": "Creepybox Virtual controller",
+  "description": "Virtual driver for network and app vr values passthrough",
+  "name": "Virtual Driver for devices",
+  "options": {
+    "mirror_actions": false,
+    "returnBindingsWithLeftHand": true,
+    "simulated_controller_type": "none"
+  }
+}
