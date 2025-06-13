@@ -7,11 +7,10 @@ EVRInitError DeviceProvider::Init(IVRDriverContext* pDriverContext)
     {
         return initError;
     }
-    
     VRDriverLog()->Log("Initializing controller"); 
 
     controllerDriver = new ControllerDriver();
-    VRServerDriverHost()->TrackedDeviceAdded("Creepybox virtual threadmill", TrackedDeviceClass_Controller, controllerDriver); //add all your devices like this.
+    VRServerDriverHost()->TrackedDeviceAdded("Virtual threadmill", TrackedDeviceClass_Controller, controllerDriver);
     remoteServer = new IPCServer(controllerDriver);
     remoteServer->Start();
     return vr::VRInitError_None;
@@ -24,6 +23,7 @@ void DeviceProvider::Cleanup()
     delete controllerDriver;
     controllerDriver = NULL;
 }
+
 const char* const* DeviceProvider::GetInterfaceVersions()
 {
     return k_InterfaceVersions;
